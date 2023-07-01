@@ -8,7 +8,7 @@ public struct ToDoItem {
     public let isCompleted: Bool
     public let createdDate: Date
     public let dateОfСhange: Date?
-       init(
+     public init(
            id: String = UUID().uuidString,
            text: String,
            importance: Importance,
@@ -26,7 +26,7 @@ public struct ToDoItem {
            self.dateОfСhange = dateОfСhange
        }
          // for json format
-       private enum Keys {
+       public enum Keys {
              static let id = "id"
              static let text = "text"
              static let importance = "importance"
@@ -43,9 +43,9 @@ public enum Importance: String {
     case high
 }
 
-extension ToDoItem {
+public extension ToDoItem {
     // json format
-    static func parseJSON(json: Any) -> ToDoItem? {
+   public static func parseJSON(json: Any) -> ToDoItem? {
           guard let jsonData = json as? [String: Any] else {
               print("json data not found")
               return nil
@@ -72,7 +72,7 @@ extension ToDoItem {
           return jsn
       }
       // CSV format
-      static func parseCSV(_ csvString: String) -> ToDoItem? {
+     public static func parseCSV(_ csvString: String) -> ToDoItem? {
           let components = csvString.components(separatedBy: ";")
           guard components.count == 7 else {
               print("csv data not correct")
@@ -106,7 +106,7 @@ extension ToDoItem {
     
 }
 
-extension DateFormatter {
+public extension DateFormatter {
    static let csvDateFormatter: DateFormatter = {
        let formatter = DateFormatter()
        formatter.dateFormat = "yyyy-MM-dd"
