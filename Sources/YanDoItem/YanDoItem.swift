@@ -1,13 +1,13 @@
 import Foundation
 
 public struct ToDoItem {
-    let id: String
-       let text: String
-       let importance: Importance
-       let deadline: Date?
-       let isCompleted: Bool
-       let createdDate: Date
-       let dateОfСhange: Date?
+    public let id: String
+    public let text: String
+    public let importance: Importance
+    public let deadline: Date?
+    public let isCompleted: Bool
+    public let createdDate: Date
+    public let dateОfСhange: Date?
        init(
            id: String = UUID().uuidString,
            text: String,
@@ -45,7 +45,7 @@ public enum Importance: String {
 
 extension ToDoItem {
     // json format
-      static func parseJSON(json: Any) -> ToDoItem? {
+    static func parseJSON(json: Any) -> ToDoItem? {
           guard let jsonData = json as? [String: Any] else {
               print("json data not found")
               return nil
@@ -60,7 +60,7 @@ extension ToDoItem {
           let dateОfСhange = (jsonData[Keys.dateOfChange] as? Int).flatMap({Date(timeIntervalSince1970: TimeInterval($0))})
           return ToDoItem(id: id, text: text, importance: importance, deadline: deadline, isCompleted: isCompleted, createdDate: createdDate, dateОfСhange: dateОfСhange)
       }
-      var json: Any {
+     public var json: Any {
           var jsn: [String: Any] = [:]
           jsn[Keys.id] = id
           jsn[Keys.text] = text
@@ -87,7 +87,7 @@ extension ToDoItem {
           let dateОfСhange = DateFormatter.csvDateFormatter.date(from: components[6])
           return ToDoItem(id: id, text: text, importance: importance, deadline: deadline, isCompleted: isCompleted, createdDate: createdDate, dateОfСhange: dateОfСhange)
       }
-      var csv: String {
+     public var csv: String {
           var csvString = "\(id);\(text);"
           if importance != .normal {
               csvString += "\(importance.rawValue);"
